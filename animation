@@ -1,0 +1,59 @@
+GsapAnimation: function () {
+          try {
+            $(document).ready(function () {
+
+              const animations = [
+                { 
+                targets: ".scroll__left", 
+                startTrigger: "left bottom", 
+                endTrigger: "bottom top", 
+                direction: "x", 
+                distance: -50 
+                },
+
+                { targets: ".scroll__right", 
+                startTrigger: "right bottom", 
+                endTrigger: "bottom top", 
+                direction: "x", 
+                distance: 100 
+                },
+                { targets: ".scroll__top", 
+                startTrigger: "top bottom", 
+                endTrigger: "bottom top", 
+                direction: "y", 
+                distance: -150 
+                },
+                { targets: ".scroll__bottom", 
+                startTrigger: "bottom bottom", 
+                endTrigger: "bottom top", 
+                direction: "y", 
+                distance: 100 
+                }
+              ];
+
+              animations.forEach(animation => {
+                const { targets, startTrigger, endTrigger, direction, distance } = animation;
+                createScrollAnimation(targets, startTrigger, endTrigger, direction, distance);
+              });
+
+              function createScrollAnimation(targets, 
+                startTrigger, endTrigger, direction, distance) {
+                gsap.to(targets, {
+                  scrollTrigger: {
+                    trigger: targets,
+                    start: startTrigger,
+                    end: endTrigger,
+                    scrub: true
+                  },
+                  duration: 1, 
+                  ease:  "power1.out",
+                  [direction]: distance
+                });
+              }
+              
+            });
+          } 
+          catch (error) {
+            console.log('error GsapAnimation');
+          }
+        },
